@@ -1,9 +1,21 @@
 import Modal from "../UI/Modal";
 import styles from "./Cart.module.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CartContext from "../Store/CartContext";
 import CartItem from "./CartItem";
+import CheckoutForm from "../CheckoutForm/CheckoutForm";
+import ProgressBar from "../UI/ProgressBar";
+
 const Cart = (props) => {
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const handleNextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+  const handlePrevStep = () => {
+    setCurrentStep(currentStep - 1);
+  };
+
   const ctx = useContext(CartContext);
   const totalAmount = `$${ctx.totalAmount.toFixed(2)}`;
 
@@ -32,18 +44,32 @@ const Cart = (props) => {
   const orderbutton = ctx.items.length > 0;
   return (
     <Modal HiddenOverlay={props.HiddenOverlay}>
-      {cartlist}
-      <div>
-        <span className={styles.total}> Total Amount</span>
-        <span>{totalAmount}</span>
-      </div>
-      <div className={styles.actions}>
-        {orderbutton && (
-          <button className={styles["button--alt"]}>Order</button>
-        )}
-        <button className={styles.button} onClick={props.HiddenOverlay}>
-          Cancel
-        </button>
+      {currentStep === 1 && (
+        <>
+          {cartlist}
+          <div>
+            <span className={styles.total}> Total Amount</span>
+            <span>{totalAmount}</span>
+          </div>
+          <div className={styles.actions}>
+            {orderbutton && (
+              <button
+                className={styles["button--alt"]}
+                onClick={handleNextStep}
+              >
+                Order
+              </button>
+            )}
+            <button className={styles.button} onClick={props.HiddenOverlay}>
+              Cancel
+            </button>
+          </div>
+        </>
+      )}
+      {currentStep === 2 && <CheckoutForm handlePrevStep={handlePrevStep} />}
+      
+      <div className={styles.progressBar}>
+        <ProgressBar currentStep={currentStep} totalSteps={3} />
       </div>
     </Modal>
   );
