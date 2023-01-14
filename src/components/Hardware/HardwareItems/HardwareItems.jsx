@@ -1,7 +1,7 @@
 import styles from "./HardwareItems.module.css";
 import HardwareItemsForm from "./HardwareItemsForm";
 import { useContext } from "react";
-import CartContext from "../../Hardware/Store/CartContext";
+import CartContext from "../../Store/CartContext";
 
 const HardwareItems = (props) => {
   const Ctx = useContext(CartContext);
