@@ -43,7 +43,7 @@ const Cart = (props) => {
   );
   const orderbutton = ctx.items.length > 0;
   return (
-    <Modal HiddenOverlay={props.HiddenOverlay}>
+    <Modal hiddenOverlay={props.hiddenOverlay}>
       {currentStep === 1 && (
         <>
           {cartlist}
@@ -60,7 +60,7 @@ const Cart = (props) => {
                 Order
               </button>
             )}
-            <button className={styles.button} onClick={props.HiddenOverlay}>
+            <button className={styles.button} onClick={props.hiddenOverlay}>
               Cancel
             </button>
           </div>

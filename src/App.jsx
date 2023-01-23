@@ -6,18 +6,18 @@ import { useState } from "react";
 import Header from "./components/Header/Header";
 
 const App = () => {
-  const [Overlay, setOverlay] = useState(false);
-  const ShowOverlayHandler = () => {
+  const [overlay, setOverlay] = useState(false);
+  const showOverlayHandler = () => {
     setOverlay(true);
   };
-  const HideOverlayHandler = () => {
+  const hideOverlayHandler = () => {
     setOverlay(false);
   };
 
   return (
     <CartProvider>
-      {Overlay && <Cart HiddenOverlay={HideOverlayHandler} />}
-      <Header OverlayisShow={ShowOverlayHandler} c />
+      {overlay && <Cart hiddenOverlay={hideOverlayHandler} />}
+      <Header OverlayisShow={showOverlayHandler} c />
       <main>
         <Hardware />
       </main>

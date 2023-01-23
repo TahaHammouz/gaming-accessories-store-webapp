@@ -17,7 +17,7 @@ const Modal = (props) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        <Backdrop onClose={props.HiddenOverlay} />,
+        <Backdrop onClose={props.hiddenOverlay} />,
         PortalElement
       )}
       {ReactDOM.createPortal(
